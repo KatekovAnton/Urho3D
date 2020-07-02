@@ -23,6 +23,8 @@
 require 'pathname'
 require 'json'
 require 'yaml'
+require 'os'
+#https://stackoverflow.com/questions/11784109/detecting-operating-systems-in-ruby
 
 ### Tasks for general users ###
 
@@ -319,7 +321,7 @@ task :ci do
   generator = ENV['XCODE'] ? 'xcode' : (ENV['APPVEYOR'] ? (ENV['MINGW'] ? 'mingw' : 'vs2019') : '')
   # Cache the initial build tree for next run on platform that is slow to generate the build tree
   system "mkdir -p #{ENV['build_tree']} && cp -rp #{ENV['HOME']}/initial-build-tree/* #{ENV['build_tree']} && git diff $(cat #{ENV['HOME']}/initial-build-tree/.sha1) $TRAVIS_COMMIT --name-only 2>/dev/null |grep -i cmake |xargs touch 2>/dev/null" if (ENV['OSX'] || ENV['WEB']) && ENV['CI'] && File.exist?("#{ENV['HOME']}/initial-build-tree/.sha1")
-  system "rake cmake #{generator} URHO3D_DATABASE_SQLITE=1 URHO3D_EXTRAS=1" or abort 'Failed to configure Urho3D library build'
+  system "rake cmake #{generator} URHO3D_PCH=0 URHO3D_DATABASE_SQLITE=1 URHO3D_EXTRAS=1" or abort 'Failed to configure Urho3D library build'
   system "bash -c 'cp -rp #{ENV['build_tree']}/* #{ENV['HOME']}/initial-build-tree 2>/dev/null && rm -rf #{ENV['HOME']}/initial-build-tree/{bin,include} 2>/dev/null && echo $TRAVIS_COMMIT >#{ENV['HOME']}/initial-build-tree/.sha1'" if (ENV['OSX'] || ENV['WEB']) && ENV['CI']
   next if timeup    # Measure the CMake configuration overhead
   # Temporarily put the logic here for clang-tools migration until everything else are in their places
