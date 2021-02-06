@@ -29,10 +29,14 @@
 #include "../../Graphics/Texture2D.h"
 #include "../../Math/Color.h"
 
+#if __APPLE__
+    #include "TargetConditionals.h"
+#endif
+
 #if defined(IOS) || defined(TVOS)
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
-#elif defined(__ANDROID__) || defined (__arm__) || defined(__aarch64__) || defined (__EMSCRIPTEN__)
+#elif (defined(__ANDROID__) || defined (__arm__) || defined(__aarch64__) || defined (__EMSCRIPTEN__)) && !defined (TARGET_OS_OSX)
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
 #else

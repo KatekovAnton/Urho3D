@@ -34,6 +34,11 @@
 #	define COMPILER_GCC
 #endif
 
+
+#if __APPLE__
+    #include "TargetConditionals.h"
+#endif
+
 /* Determine Platform */
 #if defined(__x86_64__) || defined(_M_AMD64)
 #	define PLATFORM_X64
@@ -44,6 +49,10 @@
 /* Under Windows/AMD64 with MSVC, inline assembly isn't supported */
 #if (defined(COMPILER_GCC) && defined(PLATFORM_X64)) || defined(PLATFORM_X86)
 #	define INLINE_ASM_SUPPORTED
+#endif
+
+#if (defined (TARGET_OS_OSX) && defined(__aarch64__))
+#undef INLINE_ASM_SUPPORTED
 #endif
 
 int cpuid_exists_by_eflags(void);
