@@ -28,6 +28,7 @@
 
 #include <cstdio>
 #include <fcntl.h>
+#include <thread>
 
 #ifdef __APPLE__
 #include "TargetConditionals.h"
@@ -430,69 +431,12 @@ String GetPlatform()
 
 unsigned GetNumPhysicalCPUs()
 {
-#if defined(IOS)
-    host_basic_info_data_t data;
-    GetCPUData(&data);
-#if TARGET_OS_SIMULATOR
-    // Hardcoded to dual-core on simulator mode even if the host has more
-    return Min(2, data.physical_cpu);
-#else
-    return data.physical_cpu;
-#endif
-#elif defined(TVOS)
-#if TARGET_OS_SIMULATOR
-    return Min(2, SDL_TVOS_GetActiveProcessorCount());
-#else
-    return SDL_TVOS_GetActiveProcessorCount();
-#endif
-#elif defined(__linux__)
-    struct CpuCoreCount data{};
-    GetCPUData(&data);
-    return data.numPhysicalCores_;
-#elif defined(__EMSCRIPTEN__)
-#ifdef __EMSCRIPTEN_PTHREADS__
-    return emscripten_num_logical_cores();
-#else
-    return 1; // Targeting a single-threaded Emscripten build.
-#endif
-#else
-    struct cpu_id_t data;
-    GetCPUData(&data);
-    return (unsigned)data.num_cores;
-#endif
+    return std::thread::hardware_concurrency();
 }
 
 unsigned GetNumLogicalCPUs()
 {
-#if defined(IOS)
-    host_basic_info_data_t data;
-    GetCPUData(&data);
-#if TARGET_OS_SIMULATOR
-    return Min(2, data.logical_cpu);
-#else
-    return data.logical_cpu;
-#endif
-#elif defined(TVOS)
-#if TARGET_OS_SIMULATOR
-    return Min(2, SDL_TVOS_GetActiveProcessorCount());
-#else
-    return SDL_TVOS_GetActiveProcessorCount();
-#endif
-#elif defined(__linux__)
-    struct CpuCoreCount data{};
-    GetCPUData(&data);
-    return data.numLogicalCores_;
-#elif defined(__EMSCRIPTEN__)
-#ifdef __EMSCRIPTEN_PTHREADS__
-    return emscripten_num_logical_cores();
-#else
-    return 1; // Targeting a single-threaded Emscripten build.
-#endif
-#else
-    struct cpu_id_t data;
-    GetCPUData(&data);
-    return (unsigned)data.num_logical_cpus;
-#endif
+    return std::thread::hardware_concurrency();
 }
 
 void SetMiniDumpDir(const String& pathName)

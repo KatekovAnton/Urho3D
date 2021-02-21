@@ -40,8 +40,12 @@
 #ifndef ANGELSCRIPT_H
 #define ANGELSCRIPT_H
 
+#if __APPLE__
+    #include "TargetConditionals.h"
+#endif
+
 // Urho3D: Define AS_MAX_PORTABILITY for Web and 64-bit ARM / MCST Elbrus 2000 platforms
-#if defined(__EMSCRIPTEN__) || defined(__aarch64__) || defined(__e2k__)
+#if (defined(__EMSCRIPTEN__) || defined(__aarch64__) || defined(__e2k__)) && !defined (TARGET_OS_MAC)
 #define AS_MAX_PORTABILITY
 #endif
 
