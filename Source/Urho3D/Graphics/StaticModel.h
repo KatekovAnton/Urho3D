@@ -49,6 +49,7 @@ public:
     /// Destruct.
     ~StaticModel() override;
     /// Register object factory. Drawable must be registered first.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Process octree raycast. May be called from a worker thread.
@@ -63,28 +64,37 @@ public:
     bool DrawOcclusion(OcclusionBuffer* buffer) override;
 
     /// Set model.
+    /// @manualbind
     virtual void SetModel(Model* model);
     /// Set material on all geometries.
+    /// @property
     virtual void SetMaterial(Material* material);
     /// Set material on one geometry. Return true if successful.
+    /// @property{set_materials}
     virtual bool SetMaterial(unsigned index, Material* material);
     /// Set occlusion LOD level. By default (M_MAX_UNSIGNED) same as visible.
+    /// @property
     void SetOcclusionLodLevel(unsigned level);
     /// Apply default materials from a material list file. If filename is empty (default), the model's resource name with extension .txt will be used.
     void ApplyMaterialList(const String& fileName = String::EMPTY);
 
     /// Return model.
+    /// @property
     Model* GetModel() const { return model_; }
 
     /// Return number of geometries.
+    /// @property
     unsigned GetNumGeometries() const { return geometries_.Size(); }
 
     /// Return material from the first geometry, assuming all the geometries use the same material.
+    /// @property
     virtual Material* GetMaterial() const { return GetMaterial(0); }
     /// Return material by geometry index.
+    /// @property{get_materials}
     virtual Material* GetMaterial(unsigned index) const;
 
     /// Return occlusion LOD level.
+    /// @property
     unsigned GetOcclusionLodLevel() const { return occlusionLodLevel_; }
 
     /// Determines if the given world space point is within the model geometry.

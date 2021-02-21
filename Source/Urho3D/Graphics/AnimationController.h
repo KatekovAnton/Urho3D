@@ -34,6 +34,7 @@ class Animation;
 struct Bone;
 
 /// Control data for an animation.
+/// @fakeref
 struct URHO3D_API AnimationControl
 {
     /// Construct with defaults.
@@ -91,6 +92,7 @@ public:
     /// Destruct.
     ~AnimationController() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Handle enabled/disabled state change.

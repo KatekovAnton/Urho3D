@@ -362,7 +362,6 @@ void Node::AddTag(const String& tag)
     if (scene_)
     {
         scene_->NodeTagAdded(this, tag);
-        
         // Send event
         using namespace NodeTagAdded;
         VariantMap& eventData = GetEventDataMap();

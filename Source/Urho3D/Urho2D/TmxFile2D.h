@@ -164,6 +164,7 @@ public:
     /// Destruct.
     ~TmxFile2D() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Load resource from stream. May be called from a worker thread. Return true if successful.
@@ -199,9 +200,11 @@ public:
     const TmxLayer2D* GetLayer(unsigned index) const;
 
     /// Set texture edge offset for all sprites, in pixels.
+    /// @property{set_edgeOffset}
     void SetSpriteTextureEdgeOffset(float offset);
 
     /// Return texture edge offset, in pixels.
+    /// @property{get_edgeOffset}
     float GetSpriteTextureEdgeOffset() const { return edgeOffset_; }
 
 private:

@@ -38,12 +38,15 @@ public:
     /// Destruct.
     ~Navigable() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Set whether geometry is automatically collected from child nodes. Default true.
+    /// @property
     void SetRecursive(bool enable);
 
     /// Return whether geometry is automatically collected from child nodes.
+    /// @property
     bool IsRecursive() const { return recursive_; }
 
 private:

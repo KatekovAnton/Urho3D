@@ -82,29 +82,37 @@ public:
     explicit ParticleEmitter2D(Context* context);
     /// Destruct.
     ~ParticleEmitter2D() override;
-    /// Register object factory. drawable2d must be registered first.
+    /// Register object factory. Drawable2D must be registered first.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Handle enabled/disabled state change.
     void OnSetEnabled() override;
 
     /// Set particle effect.
+    /// @property
     void SetEffect(ParticleEffect2D* effect);
     /// Set sprite.
+    /// @property
     void SetSprite(Sprite2D* sprite);
     /// Set blend mode.
+    /// @property
     void SetBlendMode(BlendMode blendMode);
     /// Set max particles.
     void SetMaxParticles(unsigned maxParticles);
     /// Set whether should be emitting. If the state was changed, also resets the emission period timer.
+    /// @property
     void SetEmitting(bool enable);
 
     /// Return particle effect.
+    /// @property
     ParticleEffect2D* GetEffect() const;
     /// Return sprite.
+    /// @property
     Sprite2D* GetSprite() const;
 
     /// Return blend mode.
+    /// @property
     BlendMode GetBlendMode() const { return blendMode_; }
 
     /// Return max particles.
@@ -119,6 +127,7 @@ public:
     /// Return sprite attribute.
     ResourceRef GetSpriteAttr() const;
     /// Return whether is currently emitting.
+    /// @property
     bool IsEmitting() const { return emitting_; }
 
 private:

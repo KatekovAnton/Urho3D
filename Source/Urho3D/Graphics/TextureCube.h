@@ -43,6 +43,7 @@ public:
     /// Destruct.
     ~TextureCube() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Load resource from stream. May be called from a worker thread. Return true if successful.
@@ -71,6 +72,7 @@ public:
     SharedPtr<Image> GetImage(CubeMapFace face) const;
 
     /// Return render surface for one face.
+    /// @property{get_renderSurfaces}
     RenderSurface* GetRenderSurface(CubeMapFace face) const { return renderSurfaces_[face]; }
 
 protected:

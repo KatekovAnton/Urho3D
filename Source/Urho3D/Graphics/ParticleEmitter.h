@@ -61,6 +61,7 @@ public:
     /// Destruct.
     ~ParticleEmitter() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Handle enabled/disabled state change.
@@ -69,14 +70,19 @@ public:
     void Update(const FrameInfo& frame) override;
 
     /// Set particle effect.
+    /// @property
     void SetEffect(ParticleEffect* effect);
     /// Set maximum number of particles.
+    /// @property
     void SetNumParticles(unsigned num);
     /// Set whether should be emitting. If the state was changed, also resets the emission period timer.
+    /// @property
     void SetEmitting(bool enable);
     /// Set whether particles should be serialized. Default true, set false to reduce scene file size.
+    /// @property
     void SetSerializeParticles(bool enable);
-    //// Set to remove either the emitter component or its owner node from the scene automatically on particle effect completion. Disabled by default.
+    /// Set to remove either the emitter component or its owner node from the scene automatically on particle effect completion. Disabled by default.
+    /// @property
     void SetAutoRemoveMode(AutoRemoveMode mode);
     /// Reset the emission period timer.
     void ResetEmissionTimer();
@@ -88,18 +94,23 @@ public:
     void ApplyEffect();
 
     /// Return particle effect.
+    /// @property
     ParticleEffect* GetEffect() const;
 
     /// Return maximum number of particles.
+    /// @property
     unsigned GetNumParticles() const { return particles_.Size(); }
 
     /// Return whether is currently emitting.
+    /// @property
     bool IsEmitting() const { return emitting_; }
 
     /// Return whether particles are to be serialized.
+    /// @property
     bool GetSerializeParticles() const { return serializeParticles_; }
 
     /// Return automatic removal mode on particle effect completion.
+    /// @property
     AutoRemoveMode GetAutoRemoveMode() const { return autoRemove_; }
 
     /// Set particles effect attribute.

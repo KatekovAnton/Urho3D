@@ -35,7 +35,7 @@ class Image;
 /// 2D texture array resource.
 class URHO3D_API Texture2DArray : public Texture
 {
-    URHO3D_OBJECT(Texture2DArray, Texture)
+    URHO3D_OBJECT(Texture2DArray, Texture);
 
 public:
     /// Construct.
@@ -43,6 +43,7 @@ public:
     /// Destruct.
     ~Texture2DArray() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Load resource from stream. May be called from a worker thread. Return true if successful.
@@ -57,6 +58,7 @@ public:
     void Release() override;
 
     /// Set the number of layers in the texture. To be used before SetData.
+    /// @property
     void SetLayers(unsigned layers);
     /// Set layers, size, format and usage. Set layers to zero to leave them unchanged. Return true if successful.
     bool SetSize(unsigned layers, int width, int height, unsigned format, TextureUsage usage = TEXTURE_STATIC);
@@ -68,10 +70,12 @@ public:
     bool SetData(unsigned layer, Image* image, bool useAlpha = false);
 
     /// Return number of layers in the texture.
+    /// @property
     unsigned GetLayers() const { return layers_; }
     /// Get data from a mip level. The destination buffer must be big enough. Return true if successful.
     bool GetData(unsigned layer, unsigned level, void* dest) const;
     /// Return render surface.
+    /// @property
     RenderSurface* GetRenderSurface() const { return renderSurface_; }
 
 protected:

@@ -40,19 +40,20 @@ class Obstacle;
 
 class URHO3D_API DynamicNavigationMesh : public NavigationMesh
 {
-    URHO3D_OBJECT(DynamicNavigationMesh, NavigationMesh)
+    URHO3D_OBJECT(DynamicNavigationMesh, NavigationMesh);
 
     friend class Obstacle;
     friend struct MeshProcess;
 
 public:
     /// Constructor.
-    explicit DynamicNavigationMesh(Context*);
+    explicit DynamicNavigationMesh(Context* context);
     /// Destructor.
     ~DynamicNavigationMesh() override;
 
     /// Register with engine context.
-    static void RegisterObject(Context*);
+    /// @nobind
+    static void RegisterObject(Context* context);
 
     /// Allocate the navigation mesh without building any tiles. Bounding box is not padded. Return true if successful.
     bool Allocate(const BoundingBox& boundingBox, unsigned maxTiles) override;
@@ -83,19 +84,25 @@ public:
     PODVector<unsigned char> GetNavigationDataAttr() const override;
 
     /// Set the maximum number of obstacles allowed.
+    /// @property
     void SetMaxObstacles(unsigned maxObstacles) { maxObstacles_ = maxObstacles; }
     /// Set the maximum number of layers that navigation construction can create.
+    /// @property
     void SetMaxLayers(unsigned maxLayers);
 
     /// Return the maximum number of obstacles allowed.
+    /// @property
     unsigned GetMaxObstacles() const { return maxObstacles_; }
     /// Return the maximum number of layers permitted to build.
+    /// @property
     unsigned GetMaxLayers() const { return maxLayers_; }
 
     /// Draw debug geometry for Obstacles.
+    /// @property
     void SetDrawObstacles(bool enable) { drawObstacles_ = enable; }
 
     /// Return whether to draw Obstacles.
+    /// @property
     bool GetDrawObstacles() const { return drawObstacles_; }
 
 protected:

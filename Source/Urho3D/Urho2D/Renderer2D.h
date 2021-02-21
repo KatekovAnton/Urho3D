@@ -37,6 +37,7 @@ struct FrameInfo;
 struct SourceBatch2D;
 
 /// 2D view batch info.
+/// @nobind
 struct ViewBatchInfo2D
 {
     /// Construct.
@@ -77,6 +78,7 @@ public:
     /// Destruct.
     ~Renderer2D() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Process octree raycast. May be called from a worker thread.

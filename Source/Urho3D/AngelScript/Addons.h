@@ -33,6 +33,7 @@
 #include "../Math/StringHash.h"
 
 #include <AngelScript/angelscript.h>
+#include "../AngelScript/wrapmacros.h"
 
 // Adapted from Angelscript's scriptarray, scriptdictionary & scriptstdstring add-ons, but with garbage collection disabled
 
@@ -317,12 +318,5 @@ public:
 private:
     StringMap map_;
 };
-
-/// Register the array type to script.
-void RegisterArray(asIScriptEngine* engine);
-/// Register the dictionary type to script.
-void RegisterDictionary(asIScriptEngine* engine);
-/// Register String to script.
-void RegisterString(asIScriptEngine* engine);
 
 }

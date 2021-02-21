@@ -38,22 +38,29 @@ public:
     /// Destruct.
     ~ConstraintWeld2D() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Set anchor.
+    /// @property
     void SetAnchor(const Vector2& anchor);
     /// Set frequency Hz.
+    /// @property
     void SetFrequencyHz(float frequencyHz);
     /// Set damping ratio.
+    /// @property
     void SetDampingRatio(float dampingRatio);
 
     /// Return anchor.
+    /// @property
     const Vector2& GetAnchor() const { return anchor_; }
 
     /// Return frequency Hz.
+    /// @property
     float GetFrequencyHz() const { return jointDef_.frequencyHz; }
 
     /// Return damping ratio.
+    /// @property
     float GetDampingRatio() const { return jointDef_.dampingRatio; }
 
 private:

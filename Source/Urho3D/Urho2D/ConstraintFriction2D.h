@@ -38,22 +38,29 @@ public:
     /// Destruct.
     ~ConstraintFriction2D() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Set anchor.
+    /// @property
     void SetAnchor(const Vector2& anchor);
     /// Set max force.
+    /// @property
     void SetMaxForce(float maxForce);
     /// Set max torque.
+    /// @property
     void SetMaxTorque(float maxTorque);
 
     /// Return anchor.
+    /// @property
     const Vector2& GetAnchor() const { return anchor_; }
 
     /// Set max force.
+    /// @property
     float GetMaxForce() const { return jointDef_.maxForce; }
 
     /// Set max torque.
+    /// @property
     float GetMaxTorque() const { return jointDef_.maxTorque; }
 
 private:

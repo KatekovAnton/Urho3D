@@ -98,9 +98,11 @@ public:
     /// Destruct.
     ~DebugRenderer() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Set line antialiasing on/off. Default false.
+    /// @property
     void SetLineAntiAlias(bool enable);
     /// Set the camera viewpoint. Call before rendering, or before adding geometry if you want to use culling.
     void SetView(Camera* camera);
@@ -152,6 +154,7 @@ public:
     void Render();
 
     /// Return whether line antialiasing is enabled.
+    /// @property
     bool GetLineAntiAlias() const { return lineAntiAlias_; }
 
     /// Return the view transform.

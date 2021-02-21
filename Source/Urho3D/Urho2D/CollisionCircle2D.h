@@ -38,19 +38,24 @@ public:
     /// Destruct.
     ~CollisionCircle2D() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Set radius.
+    /// @property
     void SetRadius(float radius);
     /// Set center.
+    /// @property
     void SetCenter(const Vector2& center);
     /// Set center.
     void SetCenter(float x, float y);
 
     /// Return radius.
+    /// @property
     float GetRadius() const { return radius_; }
 
     /// Return center.
+    /// @property
     const Vector2& GetCenter() const { return center_; }
 
 private:

@@ -42,23 +42,28 @@ public:
     /// Destruct.
     ~TileMap2D() override;
     /// Register object factory.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Visualize the component as debug geometry.
     void DrawDebugGeometry(DebugRenderer* debug, bool depthTest) override;
 
     /// Set tmx file.
+    /// @property
     void SetTmxFile(TmxFile2D* tmxFile);
     /// Add debug geometry to the debug renderer.
     void DrawDebugGeometry();
 
     /// Return tmx file.
+    /// @property
     TmxFile2D* GetTmxFile() const;
 
     /// Return information.
+    /// @property
     const TileMapInfo2D& GetInfo() const { return info_; }
 
     /// Return number of layers.
+    /// @property
     unsigned GetNumLayers() const { return layers_.Size(); }
 
     /// Return tile map layer at index.

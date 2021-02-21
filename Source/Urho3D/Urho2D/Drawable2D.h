@@ -76,20 +76,25 @@ public:
     /// Destruct.
     ~Drawable2D() override;
     /// Register object factory. Drawable must be registered first.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Handle enabled/disabled state change.
     void OnSetEnabled() override;
 
     /// Set layer.
+    /// @property
     void SetLayer(int layer);
     /// Set order in layer.
+    /// @property
     void SetOrderInLayer(int orderInLayer);
 
     /// Return layer.
+    /// @property
     int GetLayer() const { return layer_; }
 
     /// Return order in layer.
+    /// @property
     int GetOrderInLayer() const { return orderInLayer_; }
 
     /// Return all source batches (called by Renderer2D).

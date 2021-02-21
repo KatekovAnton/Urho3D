@@ -38,6 +38,7 @@ public:
     /// Destruct.
     ~StaticModelGroup() override;
     /// Register object factory. StaticModel must be registered first.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Apply attribute changes that can not be applied immediately. Called after scene load or a network update.
@@ -59,9 +60,11 @@ public:
     void RemoveAllInstanceNodes();
 
     /// Return number of instance nodes.
+    /// @property
     unsigned GetNumInstanceNodes() const { return instanceNodes_.Size(); }
 
     /// Return instance node by index.
+    /// @property{get_instanceNodes}
     Node* GetInstanceNode(unsigned index) const;
 
     /// Set node IDs attribute.

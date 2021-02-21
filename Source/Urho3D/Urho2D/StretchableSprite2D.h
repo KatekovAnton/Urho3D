@@ -35,11 +35,14 @@ public:
     /// Construct.
     explicit StretchableSprite2D(Context* context);
     /// Register object factory. Drawable2D must be registered first.
+    /// @nobind
     static void RegisterObject(Context* context);
 
     /// Set border as number of pixels from each side.
+    /// @property
     void SetBorder(const IntRect& border);
     /// Get border as number of pixels from each side.
+    /// @property
     const IntRect& GetBorder() const { return border_; }
 
 protected:

@@ -194,7 +194,6 @@ static void DEBUG_TRACE_FUNC(const char *func,
     do {                                                                       \
         if (!(cond)) {                                                         \
             DEBUG_TRACE("ASSERTION FAILED: %s", #cond);                        \
-            exit(2); /* Exit with error */                                     \
         }                                                                      \
     } while (0)
 #else
